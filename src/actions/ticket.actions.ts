@@ -1,5 +1,7 @@
 "use server";
 
+import * as Sentry from "@sentry/nextjs";
+
 export const createTicket = async (
   prevState: { success: boolean; message: string },
   formData: FormData,
@@ -8,7 +10,14 @@ export const createTicket = async (
   const description = formData.get("description") as string;
   const priority = formData.get("priority") as string;
 
-  console.log(subject, description, priority);
+  if (!subject || !description || !priority) {
+    Sentry.captureMessage("Validation Error: Missing ticket fields  ");
+
+    return {
+      success: false,
+      message: "All fields are required",
+    };
+  }
 
   return { success: true, message: "Ticket created successfully" };
 };
