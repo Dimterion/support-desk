@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { createTicket } from "@/actions/ticket.actions";
 
 const TicketForm = () => {
@@ -8,6 +9,14 @@ const TicketForm = () => {
     success: false,
     message: "",
   });
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state.success) {
+      router.push("/tickets");
+    }
+  }, [state.success, router]);
 
   return (
     <section className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-8 shadow-md">
