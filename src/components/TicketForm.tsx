@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { createTicket } from "@/actions/ticket.actions";
 
 const TicketForm = () => {
@@ -14,6 +15,7 @@ const TicketForm = () => {
 
   useEffect(() => {
     if (state.success) {
+      toast.success("Ticket submitted successfully");
       router.push("/tickets");
     }
   }, [state.success, router]);
