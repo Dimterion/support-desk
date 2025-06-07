@@ -17,7 +17,20 @@ const TicketsPage = async () => {
             <section
               key={ticket.id}
               className="flex items-center justify-between rounded-lg border-gray-200 bg-white p-6 shadow"
-            ></section>
+            >
+              {/* Left side */}
+              <article>
+                <h2 className="text-xl font-semibold text-blue-600">
+                  {ticket.subject}
+                </h2>
+              </article>
+              {/* Right side */}
+              <article className="space-y-2 text-right">
+                <h3 className="text-sm text-gray-500">
+                  Priority: <span>{ticket.priority}</span>
+                </h3>
+              </article>
+            </section>
           ))}
         </div>
       )}
