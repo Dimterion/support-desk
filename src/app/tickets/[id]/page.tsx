@@ -24,6 +24,20 @@ const TicketDetailsPage = async (props: {
           <h2 className="mb-2 text-lg font-semibold">Description</h2>
           <p>{ticket.description}</p>
         </section>
+        <section className="text-gray-700">
+          <h2 className="mb-2 text-lg font-semibold">Priority</h2>
+          <p className={getPriorityClass(ticket.priority)}>{ticket.priority}</p>
+        </section>
+        <section className="text-gray-700">
+          <h2 className="mb-2 text-lg font-semibold">Created At</h2>
+          <p>{new Date(ticket.createdAt).toLocaleString()}</p>
+        </section>
+        <Link
+          href="/tickets"
+          className="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+        >
+          ← Back to Tickets
+        </Link>
       </div>
     </main>
   );
