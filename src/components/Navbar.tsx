@@ -22,6 +22,15 @@ const Navbar = () => {
           My Tickets
         </Link>
       </section>
+      <Link href="/login" className="text-blue-600 transition hover:underline">
+        Login
+      </Link>
+      <Link
+        href="/register"
+        className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+      >
+        Register
+      </Link>
     </nav>
   );
 };
