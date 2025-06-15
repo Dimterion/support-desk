@@ -70,5 +70,20 @@ export async function registerUser(
       { userId: user.id, email },
       "info",
     );
-  } catch (error) {}
+
+    return { success: true, message: "Registration successful" };
+  } catch (error) {
+    logEvent(
+      "Unexpected error during registration",
+      "auth",
+      {},
+      "error",
+      error,
+    );
+
+    return {
+      success: false,
+      message: "Something went wrong, please try again",
+    };
+  }
 }
