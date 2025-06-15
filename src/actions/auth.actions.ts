@@ -30,5 +30,45 @@ export async function registerUser(
 
       return { success: false, message: "All fields are required" };
     }
+
+    // Check if user exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      logEvent(
+        `Registration failed: User already exists - ${email}`,
+        "auth",
+        { email },
+        "warning",
+      );
+
+      return { success: false, message: "User already exists" };
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user
+    const user = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+      },
+    });
+
+    // Sign in set auth token
+    const token = await signAuthToken({ userId: user.id });
+
+    await setAuthToken(token);
+
+    logEvent(
+      `User registered successfully: ${email}`,
+      "auth",
+      { userId: user.id, email },
+      "info",
+    );
   } catch (error) {}
 }
