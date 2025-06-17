@@ -1,4 +1,24 @@
+"use client";
+
+import { useActionState, useEffect } from "react";
+import { toast } from "sonner";
+
 const LogoutBtn = () => {
+  const initialState = {
+    success: false,
+    message: "",
+  };
+
+  const [state, formAction] = useActionState(initialState);
+
+  useEffect(() => {
+    if (state.success) {
+      toast.success("Logout successful");
+    } else if (state.message) {
+      toast.error(state.message);
+    }
+  }, [state]);
+
   return (
     <form>
       <button
