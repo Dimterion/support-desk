@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getCurrentUser } from "@/lib/current-user";
 
-const Navbar = () => {
+const Navbar = async () => {
+  const user = await getCurrentUser();
+
   return (
     <nav className="flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
       <section>
@@ -9,28 +12,38 @@ const Navbar = () => {
         </Link>
       </section>
       <section className="flex items-center space-x-4">
-        <Link
-          href="/tickets/new"
-          className="text-gray-700 transition hover:underline"
-        >
-          New Ticket
-        </Link>
-        <Link
-          href="/tickets"
-          className="text-gray-700 transition hover:underline"
-        >
-          My Tickets
-        </Link>
+        {user ? (
+          <>
+            <Link
+              href="/tickets/new"
+              className="text-gray-700 transition hover:underline"
+            >
+              New Ticket
+            </Link>
+            <Link
+              href="/tickets"
+              className="text-gray-700 transition hover:underline"
+            >
+              My Tickets
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/login"
+              className="text-blue-600 transition hover:underline"
+            >
+              Login
+            </Link>
+            <Link
+              href="/register"
+              className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+            >
+              Register
+            </Link>
+          </>
+        )}
       </section>
-      <Link href="/login" className="text-blue-600 transition hover:underline">
-        Login
-      </Link>
-      <Link
-        href="/register"
-        className="rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
-      >
-        Register
-      </Link>
     </nav>
   );
 };
