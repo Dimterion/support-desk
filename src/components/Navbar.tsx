@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getCurrentUser } from "@/lib/current-user";
+import LogoutBtn from "./LogoutBtn";
 
 const Navbar = async () => {
   const user = await getCurrentUser();
@@ -26,6 +27,7 @@ const Navbar = async () => {
             >
               My Tickets
             </Link>
+            <LogoutBtn />
           </>
         ) : (
           <>
