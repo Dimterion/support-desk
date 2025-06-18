@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
+import { logoutUser } from "@/actions/auth.actions";
 import { toast } from "sonner";
 
 const LogoutBtn = () => {
@@ -9,7 +10,7 @@ const LogoutBtn = () => {
     message: "",
   };
 
-  const [state, formAction] = useActionState(initialState);
+  const [state, formAction] = useActionState(logoutUser, initialState);
 
   useEffect(() => {
     if (state.success) {
@@ -20,7 +21,7 @@ const LogoutBtn = () => {
   }, [state]);
 
   return (
-    <form>
+    <form action={formAction}>
       <button
         type="submit"
         className="rounded bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
