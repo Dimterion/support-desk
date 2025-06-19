@@ -117,7 +117,7 @@ export async function loginUser(
 
     if (!email || !password) {
       logEvent(
-        "Validaation error: Missing login fields",
+        "Validation error: Missing login fields",
         "auth",
         { email },
         "warning",
@@ -138,5 +138,27 @@ export async function loginUser(
 
       return { success: false, message: "Invalid email or password" };
     }
-  } catch (error) {}
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      logEvent(
+        "Login failed: Incorrect password",
+        "auth",
+        { email },
+        "warning",
+      );
+
+      return { success: false, message: "Invalid email or password" };
+    }
+
+    const token = await signAuthToken({ userId: user.id });
+    await setAuthToken(token);
+
+    return { success: true, message: "Login successful" };
+  } catch (error) {
+    logEvent("Unexpected error during login", "auth", {}, "error", error);
+
+    return { success: false, message: "Error during login" };
+  }
 }
