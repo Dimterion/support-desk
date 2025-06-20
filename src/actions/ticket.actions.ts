@@ -38,7 +38,12 @@ export const createTicket = async (
 
     // Create ticket
     const ticket = await prisma.ticket.create({
-      data: { subject, description, priority },
+      data: {
+        subject,
+        description,
+        priority,
+        user: { connect: { id: user.id } },
+      },
     });
 
     logEvent(
