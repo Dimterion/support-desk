@@ -74,7 +74,15 @@ export const createTicket = async (
 
 export const getTickets = async () => {
   try {
+    const user = await getCurrentUser();
+
+    if (!user) {
+      logEvent("Unauthorized access to ticket list", "ticket", {}, "warning");
+      return [];
+    }
+
     const tickets = await prisma.ticket.findMany({
+      where: { userId: user.id },
       orderBy: { createdAt: "desc" },
     });
 
