@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { getPriorityClass } from "@/utils/ui";
 import type { Ticket } from "@/generated/prisma";
 
 type TicketItemProps = {
@@ -14,7 +16,31 @@ const TicketItem = ({ ticket }: TicketItemProps) => {
         isClosed ? "opacity-50" : ""
       }`}
     >
-      TicketItem
+      {/* Left side */}
+      <article>
+        <h2 className="text-xl font-semibold text-blue-600">
+          {ticket.subject}
+        </h2>
+      </article>
+      {/* Right side */}
+      <article className="space-y-2 text-right">
+        <h3 className="text-sm text-gray-500">
+          Priority:{" "}
+          <span className={getPriorityClass(ticket.priority)}>
+            {ticket.priority}
+          </span>
+        </h3>
+        <Link
+          href={`/tickets/${ticket.id}`}
+          className={`mt-2 inline-block rounded px-3 py-1 text-center text-sm transition ${
+            isClosed
+              ? "pointer-events-none cursor-not-allowed bg-gray-400 text-gray-700"
+              : "bg-blue-600 text-white hover:bg-blue-700"
+          }`}
+        >
+          View Ticket
+        </Link>
+      </article>
     </section>
   );
 };

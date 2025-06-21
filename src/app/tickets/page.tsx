@@ -1,9 +1,7 @@
-import Link from "next/link";
 import { getTickets } from "@/actions/ticket.actions";
-import { getPriorityClass } from "@/utils/ui";
 import { getCurrentUser } from "@/lib/current-user";
 import { redirect } from "next/navigation";
-// import { logEvent } from "@/utils/sentry";
+import TicketItem from "@/components/TicketItem";
 
 const TicketsPage = async () => {
   const user = await getCurrentUser();
@@ -24,32 +22,7 @@ const TicketsPage = async () => {
       ) : (
         <div className="mx-auto max-w-3xl space-y-4">
           {tickets.map((ticket) => (
-            <section
-              key={ticket.id}
-              className="flex items-center justify-between rounded-lg border-gray-200 bg-white p-6 shadow"
-            >
-              {/* Left side */}
-              <article>
-                <h2 className="text-xl font-semibold text-blue-600">
-                  {ticket.subject}
-                </h2>
-              </article>
-              {/* Right side */}
-              <article className="space-y-2 text-right">
-                <h3 className="text-sm text-gray-500">
-                  Priority:{" "}
-                  <span className={getPriorityClass(ticket.priority)}>
-                    {ticket.priority}
-                  </span>
-                </h3>
-                <Link
-                  href={`/tickets/${ticket.id}`}
-                  className="mt-2 inline-block rounded bg-blue-600 px-3 py-1 text-center text-sm text-white transition hover:bg-blue-700"
-                >
-                  View Ticket
-                </Link>
-              </article>
-            </section>
+            <TicketItem key={ticket.id} ticket={ticket} />
           ))}
         </div>
       )}
