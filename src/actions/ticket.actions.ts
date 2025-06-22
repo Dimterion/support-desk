@@ -161,4 +161,14 @@ export async function closeTicket(
       message: "You are not authorized to close this ticket",
     };
   }
+
+  await prisma.ticket.update({
+    where: { id: ticketId },
+    data: { status: "Closed" },
+  });
+
+  revalidatePath("/tickets");
+  revalidatePath(`/tickets/${ticketId}`);
+
+  return { success: true, message: "Ticket closed successfully" };
 }
