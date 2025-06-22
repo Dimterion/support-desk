@@ -143,4 +143,22 @@ export async function closeTicket(
     logEvent("Missing user ID", "ticket", {}, "warning");
     return { success: false, message: "Unauthorized" };
   }
+
+  const ticket = await prisma.ticket.findUnique({
+    where: { id: ticketId },
+  });
+
+  if (!ticket || ticket.userId !== user.id) {
+    logEvent(
+      "Unauthorized ticket close attempt",
+      "ticket",
+      { ticketId, userId: user.id },
+      "warning",
+    );
+
+    return {
+      success: false,
+      message: "You are not authorized to close this ticket",
+    };
+  }
 }
