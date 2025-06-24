@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { logEvent } from "@/utils/sentry";
 import { getCurrentUser } from "@/lib/current-user";
 
+// Create new ticket
 export const createTicket = async (
   prevState: { success: boolean; message: string },
   formData: FormData,
@@ -42,7 +43,9 @@ export const createTicket = async (
         subject,
         description,
         priority,
-        user: { connect: { id: user.id } },
+        user: {
+          connect: { id: user.id },
+        },
       },
     });
 
@@ -72,6 +75,7 @@ export const createTicket = async (
   }
 };
 
+// Get all user tickets
 export const getTickets = async () => {
   try {
     const user = await getCurrentUser();
@@ -101,6 +105,7 @@ export const getTickets = async () => {
   }
 };
 
+// Get single ticket details
 export const getTicketById = async (id: string) => {
   try {
     const ticket = await prisma.ticket.findUnique({

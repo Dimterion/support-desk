@@ -59,7 +59,7 @@ export async function registerUser(
       },
     });
 
-    // Sign in set auth token
+    // Sign in and set auth token
     const token = await signAuthToken({ userId: user.id });
 
     await setAuthToken(token);
@@ -88,7 +88,7 @@ export async function registerUser(
   }
 }
 
-// Log user out and remove auth cookies
+// Log user out and remove auth cookie
 export async function logoutUser(): Promise<{
   success: boolean;
   message: string;
@@ -126,7 +126,9 @@ export async function loginUser(
       return { success: false, message: "Email and password are required" };
     }
 
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
     if (!user || !user.password) {
       logEvent(
