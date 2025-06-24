@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
+
 import { closeTicket } from "@/actions/ticket.actions";
 
 const CloseTicketBtn = ({

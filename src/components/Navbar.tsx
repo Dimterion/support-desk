@@ -1,6 +1,7 @@
 import Link from "next/link";
+
 import { getCurrentUser } from "@/lib/current-user";
-import LogoutBtn from "./LogoutBtn";
+import LogoutBtn from "@/components/LogoutBtn";
 
 const Navbar = async () => {
   const user = await getCurrentUser();

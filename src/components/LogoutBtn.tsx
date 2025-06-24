@@ -1,8 +1,9 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { logoutUser } from "@/actions/auth.actions";
 import { toast } from "sonner";
+
+import { logoutUser } from "@/actions/auth.actions";
 
 const LogoutBtn = () => {
   const initialState = {
