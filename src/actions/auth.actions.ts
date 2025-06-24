@@ -1,7 +1,8 @@
 "use server";
 
-import { prisma } from "@/db/prisma";
 import bcrypt from "bcryptjs";
+
+import { prisma } from "@/db/prisma";
 import { logEvent } from "@/utils/sentry";
 import { signAuthToken, setAuthToken, removeAuthToken } from "@/lib/auth";
 

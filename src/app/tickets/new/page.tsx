@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
-import TicketForm from "@/components/TicketForm";
+
 import { getCurrentUser } from "@/lib/current-user";
+import TicketForm from "@/components/TicketForm";
 
 const NewTicketPage = async () => {
   const user = await getCurrentUser();

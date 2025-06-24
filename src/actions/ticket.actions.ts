@@ -1,7 +1,8 @@
 "use server";
 
-import { prisma } from "@/db/prisma";
 import { revalidatePath } from "next/cache";
+
+import { prisma } from "@/db/prisma";
 import { logEvent } from "@/utils/sentry";
 import { getCurrentUser } from "@/lib/current-user";
 
