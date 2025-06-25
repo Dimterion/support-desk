@@ -2,11 +2,11 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { logEvent } from "@/utils/sentry";
 
-// Encrypt and sign token
 const secret = new TextEncoder().encode(process.env.AUTH_SECRET);
 const cookieName = "auth-token";
 
-export async function signAuthToken(payload: any) {
+// Encrypt and sign token
+export async function signAuthToken(payload: never) {
   try {
     const token = await new SignJWT(payload)
       .setProtectedHeader({ alg: "HS256" })
@@ -41,7 +41,7 @@ export async function verifyAuthToken<T>(token: string): Promise<T> {
   }
 }
 
-// Set the auth token
+// Set the auth cookie
 export async function setAuthToken(token: string) {
   try {
     const cookieStore = await cookies();

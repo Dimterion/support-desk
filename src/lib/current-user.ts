@@ -5,7 +5,7 @@ type AuthPayload = {
   userId: string;
 };
 
-export async function getCurrentUser() {
+export const getCurrentUser = async () => {
   try {
     const token = await getAuthToken();
 
@@ -30,4 +30,4 @@ export async function getCurrentUser() {
 
     return null;
   }
-}
+};
