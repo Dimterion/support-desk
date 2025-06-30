@@ -25,7 +25,7 @@ const LogoutBtn = () => {
     <form action={formAction}>
       <button
         type="submit"
-        className="rounded bg-red-500 px-4 py-2 text-white transition hover:bg-red-600"
+        className="cursor-pointer rounded bg-red-500 px-2 py-2 text-sm text-white transition hover:bg-red-600 sm:px-4 sm:text-base"
       >
         Logout
       </button>

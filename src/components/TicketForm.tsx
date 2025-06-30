@@ -54,7 +54,7 @@ const TicketForm = () => {
           <option value="High">High Priority</option>
         </select>
         <button
-          className="w-full rounded bg-blue-600 p-3 text-white transition hover:bg-blue-700 disabled:opacity-50"
+          className="w-full cursor-pointer rounded bg-blue-600 p-3 text-white transition hover:bg-blue-700 disabled:opacity-50"
           type="submit"
         >
           Submit
