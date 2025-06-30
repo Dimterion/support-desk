@@ -7,7 +7,7 @@ const Navbar = async () => {
   const user = await getCurrentUser();
 
   return (
-    <nav className="flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
+    <nav className="flex items-center justify-between border-b border-gray-200 bg-white px-4 py-4 text-center sm:px-6">
       <section>
         <Link href="/" className="text-sm font-bold text-blue-600 sm:text-xl">
           Support Desk

@@ -40,7 +40,7 @@ const TicketDetailsPage = async (props: {
 
         <Link
           href="/tickets"
-          className="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+          className="inline-block rounded bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700 text-sm sm:text-base"
         >
           ← Back to Tickets
         </Link>
